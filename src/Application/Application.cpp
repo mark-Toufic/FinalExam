@@ -114,6 +114,7 @@ void Application::Quit() {
 	_isRunning = false;
 }
 
+
 bool Application::LoadScene(const std::string& path) {
 	if (std::filesystem::exists(path)) { 
 
@@ -249,7 +250,7 @@ void Application::_RegisterClasses()
 
 	// Initialize our resource manager
 	ResourceManager::Init();
-
+	//hi
 	// Register all our resource types so we can load them from manifest files
 	ResourceManager::RegisterType<Texture1D>();
 	ResourceManager::RegisterType<Texture2D>();
