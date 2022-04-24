@@ -225,9 +225,9 @@ void DefaultSceneLayer::_CreateScene()
 			monkeyMaterial->Name = "Monkey";
 			monkeyMaterial->Set("u_Material.AlbedoMap", monkeyTex);
 			monkeyMaterial->Set("u_Material.NormalMap", normalMapDefault);
-			monkeyMaterial->Set("u_Material.Shininess", 0.5f);
+			monkeyMaterial->Set("u_Material.Shininess", 0.1f);
 		}
-
+		/*
 		// This will be the reflective material, we'll make the whole thing 50% reflective
 		Material::Sptr testMaterial = ResourceManager::CreateAsset<Material>(deferredForward); 
 		{
@@ -235,6 +235,15 @@ void DefaultSceneLayer::_CreateScene()
 			testMaterial->Set("u_Material.AlbedoMap", boxTexture); 
 			testMaterial->Set("u_Material.Specular", boxSpec);
 			testMaterial->Set("u_Material.NormalMap", normalMapDefault);
+		}*/
+
+		Material::Sptr testMaterial = ResourceManager::CreateAsset<Material>(deferredForward);
+		{
+			testMaterial->Name = "Box-Specular";
+			testMaterial->Set("u_Material.AlbedoMap", boxTexture);
+			testMaterial->Set("u_Material.NormalMap", normalMapDefault);
+			testMaterial->Set("u_Material.Shininess", 0.1f);
+			testMaterial->Set("u_Material.Specular", solidGrey);
 		}
 
 		// Our foliage vertex shader material 
@@ -251,7 +260,7 @@ void DefaultSceneLayer::_CreateScene()
 			foliageMaterial->Set("u_VerticalScale", 1.0f);
 			foliageMaterial->Set("u_WindSpeed", 1.0f);
 		}
-
+		/*
 		// Our toon shader material
 		Material::Sptr toonMaterial = ResourceManager::CreateAsset<Material>(celShader);
 		{
@@ -262,7 +271,7 @@ void DefaultSceneLayer::_CreateScene()
 			toonMaterial->Set("u_Material.Shininess", 0.1f); 
 			toonMaterial->Set("u_Material.Steps", 8);
 		}
-
+		*/
 
 		Material::Sptr displacementTest = ResourceManager::CreateAsset<Material>(displacementShader);
 		{
@@ -329,6 +338,7 @@ void DefaultSceneLayer::_CreateScene()
 			multiTextureMat->Set("u_Scale", 0.1f); 
 		}
 
+		/*
 		// Create some lights for our scene
 		GameObject::Sptr lightParent = scene->CreateGameObject("Lights");
 
@@ -342,6 +352,22 @@ void DefaultSceneLayer::_CreateScene()
 			lightComponent->SetRadius(glm::linearRand(0.1f, 10.0f));
 			lightComponent->SetIntensity(glm::linearRand(1.0f, 2.0f));
 		}
+		*/
+		
+		// Added a light parent with a single light currently attached to it
+		GameObject::Sptr SingleLight = scene->CreateGameObject("SingleLight");
+		SingleLight->SetPostion(glm::vec3(0.0f, -13.590f, 4.620f));
+
+		// The first light source
+		GameObject::Sptr Slight = scene->CreateGameObject("Light");
+		Slight->SetPostion(glm::vec3(0.0f, -3.0f, 0.0f));
+		SingleLight->AddChild(Slight);
+
+		Light::Sptr SlightComponent = Slight->Add<Light>();
+		SlightComponent->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+		SlightComponent->SetRadius(30.0f);
+		SlightComponent->SetIntensity(30.0f);
+		
 
 		// We'll create a mesh that is a simple plane that we can resize later
 		MeshResource::Sptr planeMesh = ResourceManager::CreateAsset<MeshResource>();
@@ -495,7 +521,7 @@ void DefaultSceneLayer::_CreateScene()
 			// Add a render component
 			RenderComponent::Sptr renderer = Enemy->Add<RenderComponent>();
 			renderer->SetMesh(sphere);
-			renderer->SetMaterial(toonMaterial);
+			renderer->SetMaterial(boxMaterial);
 
 			Enemy->Add<EnemyBehaviour>();
 

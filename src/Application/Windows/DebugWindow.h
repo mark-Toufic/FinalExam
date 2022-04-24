@@ -11,8 +11,8 @@ public:
 	virtual ~DebugWindow();
 
 	// Inherited from IEditorWindow
-
+	
 	virtual void RenderMenuBar() override;
-
+	
 protected:
 };

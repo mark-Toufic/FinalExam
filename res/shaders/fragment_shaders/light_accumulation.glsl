@@ -52,12 +52,14 @@ void CalcPointLightContribution(vec3 viewPos, vec3 normal, Light light, float sh
 
         // Dot product between normal and light
         float NdotL = max(dot(normal, lightDir), 0.0);
-        diffuse += NdotL * attenuation * light.PositionIntensity.w * light.ColorAttenuation.rgb;
+       diffuse += NdotL * attenuation * light.PositionIntensity.w * light.ColorAttenuation.rgb;
+       //diffuse += NdotL * light.PositionIntensity.w * light.ColorAttenuation.rgb;
         
         vec3 reflectDir = reflect(lightDir, normal);
         float VdotR = pow(max(dot(normalize(-viewPos), reflectDir), 0.0), pow(2, shininess * 8));
         
         specular += VdotR * light.ColorAttenuation.rgb * shininess * attenuation * light.PositionIntensity.w;
+        //specular += VdotR * light.ColorAttenuation.rgb * shininess * light.PositionIntensity.w;
 }
 
 void main() {
@@ -79,7 +81,38 @@ void main() {
     for (int ix = 0; ix < AmbientColAndNumLights.w && ix < MAX_LIGHTS; ix++) {
         CalcPointLightContribution(viewPos, normal, Lights[ix], specularPow, diffuse, specular);
     }
+     // For Specular Only Lighting
+    if (IsFlagSet(FLAG_ENABLE_SPECULAR)) {
+        outSpecular = vec4(specular,1);
+        diffuse = vec3(0);
+        outDiffuse = vec4(diffuse,1);
+    }
 
-    outDiffuse = vec4(diffuse, 1);
-    outSpecular = vec4(specular, 1);
+     // For Diffuse Only Lighting
+    if (IsFlagSet(FLAG_ENABLE_DIFFUSE)) {
+        outDiffuse = vec4(diffuse, 1);
+        specular = vec3(0);
+        outSpecular = vec4(specular,1);
+    }
+
+     // For Ambient Only Lighting
+    if (IsFlagSet(FLAG_ENABLE_AMBIENT)) {
+        outDiffuse = vec4(AmbientColAndNumLights.rgb, 1);
+        outSpecular = vec4(AmbientColAndNumLights.rgb,1);
+    }
+    /*
+     // For No Lighting
+    if (IsFlagSet(FLAG_ENABLE_NOLIGHT)) {
+        diffuse = vec3(0);
+        specular = vec3(0);
+        outDiffuse = vec4(diffuse, 1);
+        outSpecular = vec4(specular,1);
+    }
+    */
+    else
+   {
+        outDiffuse = vec4(diffuse, 1);
+        outSpecular = vec4(specular, 1);
+    }
+    
 }
