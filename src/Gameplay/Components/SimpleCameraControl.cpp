@@ -11,6 +11,7 @@
 #include "Application/Application.h"
 
 float jumpcooldown = 0;
+ float playerX, playerY;
 
 SimpleCameraControl::SimpleCameraControl() :
 	IComponent(),
@@ -46,18 +47,25 @@ void SimpleCameraControl::Update(float deltaTime)
 			glm::vec3 input = glm::vec3(0.0f);
 			
 			if (InputEngine::IsKeyDown(GLFW_KEY_A)) {
+				
 				input.x -= _moveSpeeds.y;
+				playerX = GetGameObject()->GetPosition().x;
+				playerY = GetGameObject()->GetPosition().y;
+
+				
 			}
 			if (InputEngine::IsKeyDown(GLFW_KEY_D)) {
+				
 				input.x += _moveSpeeds.y;
+				playerX = GetGameObject()->GetPosition().x;
+				playerY = GetGameObject()->GetPosition().y;
+				
 			}
-			if (InputEngine::IsKeyDown(GLFW_KEY_SPACE)) {
-				
-				
-				
-					input.z += _moveSpeeds.z;
-				
-				
+
+			
+			if (InputEngine::IsKeyDown(GLFW_KEY_SPACE)) 
+			{
+					
 			}
 			input *= deltaTime;
 

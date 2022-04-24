@@ -366,6 +366,26 @@ void DefaultSceneLayer::_CreateScene()
 			//scene->MainCamera = cam;
 		}
 
+		GameObject::Sptr Player = scene->CreateGameObject("Monkey 1");
+		{
+			// Set position in the scene
+			Player->SetPostion(glm::vec3(30.f, 0.0f, 1.0f));
+
+			// Create and attach a renderer for the monkey
+			RenderComponent::Sptr renderer = Player->Add<RenderComponent>();
+			renderer->SetMesh(monkeyMesh);
+			renderer->SetMaterial(monkeyMaterial);
+
+			// Add some behaviour that relies on the physics body
+			Player->Add<JumpBehaviour>();
+			Player->Add<SimpleCameraControl>();
+		
+			RigidBody::Sptr PlayerRG = Player->Add<RigidBody>(RigidBodyType::Dynamic);
+			PlayerRG->AddCollider(SphereCollider::Create(0.75));
+			PlayerRG->SetLinearDamping(2.0f);
+		}
+
+
 
 		// Set up all our sample objects
 		GameObject::Sptr plane = scene->CreateGameObject("Plane");
@@ -387,67 +407,47 @@ void DefaultSceneLayer::_CreateScene()
 			physics->AddCollider(BoxCollider::Create(glm::vec3(50.0f, 50.0f, 1.0f)))->SetPosition({ 0,0,-1 });
 		}
 
-		GameObject::Sptr Player = scene->CreateGameObject("Monkey 1");
-		{
-			// Set position in the scene
-			Player->SetPostion(glm::vec3(30.f, 0.0f, 1.0f));
+		
+
+
+		//// Box to showcase the specular material
+		//GameObject::Sptr wall1 = scene->CreateGameObject("Specular Object");
+		//{
+		//	MeshResource::Sptr boxMesh = ResourceManager::CreateAsset<MeshResource>();
+		//	boxMesh->AddParam(MeshBuilderParam::CreateCube(ZERO, ONE));
+		//	boxMesh->GenerateMesh();
+
+		//	// Set and rotation position in the scene
+		//	wall1->SetPostion(glm::vec3(0, 0.0f, 4.0f));
+		//	wall1->SetScale(glm::vec3(-1.f, -3.f, 9.0f));
+
+		//	// Add a render component
+		//	RenderComponent::Sptr renderer = wall1->Add<RenderComponent>();
+		//	renderer->SetMesh(boxMesh);
+		//	renderer->SetMaterial(testMaterial); 
+		//	RigidBody::Sptr wallRB = wall1->Add<RigidBody>(RigidBodyType::Static);
+		//	wallRB->AddCollider(BoxCollider::Create(glm::vec3(1, 1, 4.5)));
+
+		//
+		//}
 
 		
 
-			// Create and attach a renderer for the monkey
-			RenderComponent::Sptr renderer = Player->Add<RenderComponent>();
-			renderer->SetMesh(monkeyMesh);
-			renderer->SetMaterial(monkeyMaterial);
 
-			// Example of a trigger that interacts with static and kinematic bodies as well as dynamic bodies
-			TriggerVolume::Sptr trigger = Player->Add<TriggerVolume>();
-			trigger->SetFlags(TriggerTypeFlags::Statics | TriggerTypeFlags::Kinematics);
-			trigger->AddCollider(BoxCollider::Create(glm::vec3(1.0f)));
-
-			// Add some behaviour that relies on the physics body
-			Player->Add<JumpBehaviour>();
-			Player->Add<SimpleCameraControl>();
-
-			RigidBody::Sptr PlayerTrigger = Player->Add<RigidBody>(RigidBodyType::Dynamic);
-			PlayerTrigger->AddCollider(SphereCollider::Create(0.75));
-			PlayerTrigger->SetLinearDamping(2.0f);
-		}
-
-
-		// Box to showcase the specular material
-		GameObject::Sptr wall1 = scene->CreateGameObject("Specular Object");
+		GameObject::Sptr Enemy = scene->CreateGameObject("Enemy");
 		{
-			MeshResource::Sptr boxMesh = ResourceManager::CreateAsset<MeshResource>();
-			boxMesh->AddParam(MeshBuilderParam::CreateCube(ZERO, ONE));
-			boxMesh->GenerateMesh();
-
-			// Set and rotation position in the scene
-			wall1->SetPostion(glm::vec3(0, 0.0f, 4.0f));
-			wall1->SetScale(glm::vec3(-1.f, -3.f, 9.0f));
+			Enemy->SetPostion(glm::vec3(-9.0f, 0.0f, 1.0f));
 
 			// Add a render component
-			RenderComponent::Sptr renderer = wall1->Add<RenderComponent>();
-			renderer->SetMesh(boxMesh);
-			renderer->SetMaterial(testMaterial); 
-			RigidBody::Sptr wallRB = wall1->Add<RigidBody>(RigidBodyType::Static);
-			wallRB->AddCollider(BoxCollider::Create(glm::vec3(1, 1, 4.5)));
-
-		
-		}
-
-		
-
-
-		GameObject::Sptr toonBall = scene->CreateGameObject("Toon Object");
-		{
-			toonBall->SetPostion(glm::vec3(-9.0f, 0.0f, 1.0f));
-
-			// Add a render component
-			RenderComponent::Sptr renderer = toonBall->Add<RenderComponent>();
+			RenderComponent::Sptr renderer = Enemy->Add<RenderComponent>();
 			renderer->SetMesh(sphere);
 			renderer->SetMaterial(toonMaterial);
 
-			toonBall->Add<EnemyBehaviour>();
+			Enemy->Add<EnemyBehaviour>();
+
+			RigidBody::Sptr EnemyRG = Enemy->Add<RigidBody>(RigidBodyType::Dynamic);
+			EnemyRG->AddCollider(SphereCollider::Create(0.75));
+			EnemyRG->SetLinearDamping(2.0f);
 
 		
 		}

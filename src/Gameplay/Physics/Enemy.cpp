@@ -58,41 +58,39 @@ void EnemyBehaviour::Update(float deltaTime)
 	
 	
 		
-			if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 1) + pow(GetGameObject()->GetPosition().y - playerY, 1) * 1)) <= 4)
+			if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 2) + pow(GetGameObject()->GetPosition().y - playerY, 2) * 2)) <= 6)
 			{
 
 
 				if (GetGameObject()->GetPosition().x > playerX)
 				{
-					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x - 0.01, GetGameObject()->GetPosition().y, GetGameObject()->GetPosition().z));
+					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x - 0.03, GetGameObject()->GetPosition().y, GetGameObject()->GetPosition().z));
 				}
 
 				if (GetGameObject()->GetPosition().y > playerY)
 				{
-					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y - 0.01, GetGameObject()->GetPosition().z));
+					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y - 0.03, GetGameObject()->GetPosition().z));
 				}
 
 				if (GetGameObject()->GetPosition().x < playerX)
 				{
-					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x + 0.01, GetGameObject()->GetPosition().y, GetGameObject()->GetPosition().z));
+					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x + 0.03, GetGameObject()->GetPosition().y, GetGameObject()->GetPosition().z));
 				}
 
 				if (GetGameObject()->GetPosition().y < playerY)
 				{
-					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y + 0.01, GetGameObject()->GetPosition().z));
+					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y + 0.03, GetGameObject()->GetPosition().z));
 				}
 
 				GetGameObject()->LookAt(glm::vec3(playerX, playerY, 0));
 
-				/*if (GetGameObject()->GetPosition().x == playerX)
+			
+
+				if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 2) + pow(GetGameObject()->GetPosition().y - playerY, 2) * 2)) <= 1.5)
 				{
-					if (GetGameObject()->GetPosition().y == playerX)
-					{
+					std::cout << "die";
 
-					}
-
-				}*/
-
+				}
 
 
 

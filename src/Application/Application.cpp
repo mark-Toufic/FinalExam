@@ -99,7 +99,8 @@ GLFWwindow* Application::GetWindow() { return _window; }
 
 const glm::ivec2& Application::GetWindowSize() const { return _windowSize; }
 
-float playerX, playerY;
+
+
 
 
 const glm::uvec4& Application::GetPrimaryViewport() const {
@@ -207,8 +208,8 @@ void Application::_Run()
 			_isRunning = false;
 		}
 
-		
 
+		
 		// Grab the timing singleton instance as a reference
 		Timing& timing = Timing::_singleton;
 
