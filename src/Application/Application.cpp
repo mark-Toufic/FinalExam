@@ -47,6 +47,9 @@
 #include "Gameplay/Components/ShadowCamera.h"
 #include "Gameplay/Components/ShipMoveBehaviour.h"
 
+//Physics
+#include "Gameplay/Physics/Enemy.h"
+
 // GUI
 #include "Gameplay/Components/GUI/RectTransform.h"
 #include "Gameplay/Components/GUI/GuiPanel.h"
@@ -64,7 +67,7 @@
 #include "Layers/PostProcessingLayer.h"
 
 Application* Application::_singleton = nullptr;
-std::string Application::_applicationName = "INFR-2350U - DEMO";
+std::string Application::_applicationName = "Exam";
 
 #define DEFAULT_WINDOW_WIDTH 1280
 #define DEFAULT_WINDOW_HEIGHT 720
@@ -95,6 +98,8 @@ void Application::Start(int argCount, char** arguments) {
 GLFWwindow* Application::GetWindow() { return _window; }
 
 const glm::ivec2& Application::GetWindowSize() const { return _windowSize; }
+
+float playerX, playerY;
 
 
 const glm::uvec4& Application::GetPrimaryViewport() const {
@@ -202,6 +207,8 @@ void Application::_Run()
 			_isRunning = false;
 		}
 
+		
+
 		// Grab the timing singleton instance as a reference
 		Timing& timing = Timing::_singleton;
 
@@ -280,6 +287,7 @@ void Application::_RegisterClasses()
 	ComponentManager::RegisterType<Light>();
 	ComponentManager::RegisterType<ShadowCamera>();
 	ComponentManager::RegisterType<ShipMoveBehaviour>();
+	ComponentManager::RegisterType<EnemyBehaviour>();
 }
 
 void Application::_Load() {

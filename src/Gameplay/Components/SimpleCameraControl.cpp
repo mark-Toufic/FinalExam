@@ -10,10 +10,12 @@
 #include "Gameplay/InputEngine.h"
 #include "Application/Application.h"
 
+float jumpcooldown = 0;
+
 SimpleCameraControl::SimpleCameraControl() :
 	IComponent(),
 	_mouseSensitivity({ 0.5f, 0.3f }),
-	_moveSpeeds(glm::vec3(1.0f)),
+	_moveSpeeds(glm::vec3(4.0f)),
 	_shiftMultipler(2.0f),
 	_currentRot(glm::vec2(0.0f)),
 	_isMousePressed(false)
@@ -24,11 +26,11 @@ SimpleCameraControl::~SimpleCameraControl() = default;
 void SimpleCameraControl::Update(float deltaTime)
 {
 	if (Application::Get().IsFocused) {
-		if (InputEngine::GetMouseState(GLFW_MOUSE_BUTTON_LEFT) == ButtonState::Pressed) {
+		
 			_prevMousePos = InputEngine::GetMousePos();   
-		}
+		
 
-		if (InputEngine::IsMouseButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
+	
 			glm::dvec2 currentMousePos = InputEngine::GetMousePos();
 			glm::dvec2 delta = currentMousePos - _prevMousePos;
 
@@ -42,47 +44,36 @@ void SimpleCameraControl::Update(float deltaTime)
 			_prevMousePos = currentMousePos;
 
 			glm::vec3 input = glm::vec3(0.0f);
-			if (InputEngine::IsKeyDown(GLFW_KEY_W)) {
-				input.z -= _moveSpeeds.x;
-			}
-			if (InputEngine::IsKeyDown(GLFW_KEY_S)) {
-				input.z += _moveSpeeds.x;
-			}
+			
 			if (InputEngine::IsKeyDown(GLFW_KEY_A)) {
 				input.x -= _moveSpeeds.y;
 			}
 			if (InputEngine::IsKeyDown(GLFW_KEY_D)) {
 				input.x += _moveSpeeds.y;
 			}
-			if (InputEngine::IsKeyDown(GLFW_KEY_LEFT_CONTROL)) {
-				input.y -= _moveSpeeds.z;
-			}
 			if (InputEngine::IsKeyDown(GLFW_KEY_SPACE)) {
-				input.y += _moveSpeeds.z;
+				
+				
+				
+					input.z += _moveSpeeds.z;
+				
+				
 			}
-
-			if (InputEngine::IsKeyDown(GLFW_KEY_LEFT_SHIFT)) {
-				input *= _shiftMultipler;
-			}
-
 			input *= deltaTime;
 
 			glm::vec3 worldMovement = currentRot * glm::vec4(input, 1.0f);
 			GetGameObject()->SetPostion(GetGameObject()->GetPosition() + worldMovement);
 		}
-	}
+	
 	_prevMousePos = InputEngine::GetMousePos();
 }
 
-void SimpleCameraControl::RenderImGui()
-{
-	LABEL_LEFT(ImGui::DragFloat2, "Mouse Sensitivity", &_mouseSensitivity.x, 0.01f);
-	LABEL_LEFT(ImGui::DragFloat3, "Move Speed       ", &_moveSpeeds.x, 0.01f, 0.01f);
-	LABEL_LEFT(ImGui::DragFloat , "Shift Multiplier ", &_shiftMultipler, 0.01f, 1.0f);
-	ImGui::Text((~InputEngine::GetMouseState(GLFW_MOUSE_BUTTON_LEFT)).c_str());
-	glm::dvec2 delta = InputEngine::GetMousePos() - _prevMousePos;
-	ImGui::Text("%d, %d", delta.x, delta.y);
-}
+	void SimpleCameraControl::RenderImGui()
+	{
+		LABEL_LEFT(ImGui::DragFloat2, "Mouse Sensitivity", &_mouseSensitivity.x, 0.01f);
+		LABEL_LEFT(ImGui::DragFloat3, "Move Speed       ", &_moveSpeeds.x, 0.01f, 0.01f);
+		LABEL_LEFT(ImGui::DragFloat, "Shift Multiplier ", &_shiftMultipler, 0.01f, 1.0f);
+	}
 
 nlohmann::json SimpleCameraControl::ToJson() const {
 	return {

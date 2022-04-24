@@ -162,6 +162,7 @@
     <ClInclude Include="src\Gameplay\Physics\Colliders\CylinderCollider.h" />
     <ClInclude Include="src\Gameplay\Physics\Colliders\PlaneCollider.h" />
     <ClInclude Include="src\Gameplay\Physics\Colliders\SphereCollider.h" />
+    <ClInclude Include="src\Gameplay\Physics\Enemy.h" />
     <ClInclude Include="src\Gameplay\Physics\ICollider.h" />
     <ClInclude Include="src\Gameplay\Physics\PhysicsBase.h" />
     <ClInclude Include="src\Gameplay\Physics\RigidBody.h" />
@@ -257,6 +258,7 @@
     <ClCompile Include="src\Gameplay\Physics\Colliders\CylinderCollider.cpp" />
     <ClCompile Include="src\Gameplay\Physics\Colliders\PlaneCollider.cpp" />
     <ClCompile Include="src\Gameplay\Physics\Colliders\SphereCollider.cpp" />
+    <ClCompile Include="src\Gameplay\Physics\Enemy.cpp" />
     <ClCompile Include="src\Gameplay\Physics\ICollider.cpp" />
     <ClCompile Include="src\Gameplay\Physics\PhysicsBase.cpp" />
     <ClCompile Include="src\Gameplay\Physics\RigidBody.cpp" />

@@ -207,6 +207,9 @@
     <ClInclude Include="src\Gameplay\Physics\Colliders\SphereCollider.h">
       <Filter>Gameplay\Physics\Colliders</Filter>
     </ClInclude>
+    <ClInclude Include="src\Gameplay\Physics\Enemy.h">
+      <Filter>Gameplay\Physics</Filter>
+    </ClInclude>
     <ClInclude Include="src\Gameplay\Physics\ICollider.h">
       <Filter>Gameplay\Physics</Filter>
     </ClInclude>
@@ -487,6 +490,9 @@
     </ClCompile>
     <ClCompile Include="src\Gameplay\Physics\Colliders\SphereCollider.cpp">
       <Filter>Gameplay\Physics\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Gameplay\Physics\Enemy.cpp">
+      <Filter>Gameplay\Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\Gameplay\Physics\ICollider.cpp">
       <Filter>Gameplay\Physics</Filter>
