@@ -11,7 +11,7 @@
 #include "Application/Application.h"
 
 float jumpcooldown = 0;
- float playerX, playerY;
+ float playerX, playerY, playerZ;
 
 SimpleCameraControl::SimpleCameraControl() :
 	IComponent(),
@@ -51,6 +51,7 @@ void SimpleCameraControl::Update(float deltaTime)
 				input.x -= _moveSpeeds.y;
 				playerX = GetGameObject()->GetPosition().x;
 				playerY = GetGameObject()->GetPosition().y;
+				playerZ = GetGameObject()->GetPosition().y;
 
 				
 			}
@@ -59,14 +60,19 @@ void SimpleCameraControl::Update(float deltaTime)
 				input.x += _moveSpeeds.y;
 				playerX = GetGameObject()->GetPosition().x;
 				playerY = GetGameObject()->GetPosition().y;
+				playerZ = GetGameObject()->GetPosition().z;
 				
 			}
 
-			
-			if (InputEngine::IsKeyDown(GLFW_KEY_SPACE)) 
+			if (InputEngine::IsKeyDown(GLFW_KEY_SPACE))
 			{
-					
+				input.z += _moveSpeeds.y;
+				playerX = GetGameObject()->GetPosition().x;
+				playerY = GetGameObject()->GetPosition().y;
+				playerZ = GetGameObject()->GetPosition().z;
+				
 			}
+				
 			input *= deltaTime;
 
 			glm::vec3 worldMovement = currentRot * glm::vec4(input, 1.0f);

@@ -46,7 +46,7 @@ T Lerp(const T& a, const T& b, float t)
 	return (1.0f - t) * a + t * b;
 }
 
-extern float playerX, playerY;
+extern float playerX, playerY, playerZ;
 
 
 EnemyBehaviour::~EnemyBehaviour() = default;
@@ -58,7 +58,7 @@ void EnemyBehaviour::Update(float deltaTime)
 	
 	
 		
-			if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 2) + pow(GetGameObject()->GetPosition().y - playerY, 2) * 2)) <= 6)
+			if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 2) + pow(GetGameObject()->GetPosition().y - playerY, 2) * 2)) <= 4)
 			{
 
 
@@ -82,18 +82,28 @@ void EnemyBehaviour::Update(float deltaTime)
 					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y + 0.03, GetGameObject()->GetPosition().z));
 				}
 
+		
+
 				GetGameObject()->LookAt(glm::vec3(playerX, playerY, 0));
 
 			
 
-				if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 2) + pow(GetGameObject()->GetPosition().y - playerY, 2) * 2)) <= 1.5)
+				if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 1) + pow(GetGameObject()->GetPosition().y - playerY, 1) + pow(GetGameObject()->GetPosition().z - playerZ, 1) * 1)) <= 1.5)
 				{
-					std::cout << "die";
-
+					if (GetGameObject()->GetPosition().x == playerX)
+					{
+						if (GetGameObject()->GetPosition().y == playerY)
+						{
+							if (GetGameObject()->GetPosition().x == playerX)
+							{
+								if (GetGameObject()->GetPosition().y == playerY)
+								{
+									std::cout << "die";
+								}
+							}
+						}
+					}
 				}
-
-
-
 
 			}
 

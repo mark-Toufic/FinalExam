@@ -409,30 +409,84 @@ void DefaultSceneLayer::_CreateScene()
 
 		
 
+		GameObject::Sptr wall1 = scene->CreateGameObject("Specular Object");
+		{
+			MeshResource::Sptr boxMesh = ResourceManager::CreateAsset<MeshResource>();
+			boxMesh->AddParam(MeshBuilderParam::CreateCube(ZERO, ONE));
+			boxMesh->GenerateMesh();
+
+			//Set and rotation position in the scene
+			wall1->SetPostion(glm::vec3(5, 0.0f, 2.0f));
+			wall1->SetScale(glm::vec3(-1.f, -3.f, 4.5f));
+
+			// Add a render component
+			RenderComponent::Sptr renderer1 = wall1->Add<RenderComponent>();
+			renderer1->SetMesh(boxMesh);
+			renderer1->SetMaterial(testMaterial);
+
+			RigidBody::Sptr wallRB = wall1->Add<RigidBody>(RigidBodyType::Static);
+			wallRB->AddCollider(BoxCollider::Create(glm::vec3(1, 1.5, 2.5)));
+		}
 
 		//// Box to showcase the specular material
-		//GameObject::Sptr wall1 = scene->CreateGameObject("Specular Object");
-		//{
-		//	MeshResource::Sptr boxMesh = ResourceManager::CreateAsset<MeshResource>();
-		//	boxMesh->AddParam(MeshBuilderParam::CreateCube(ZERO, ONE));
-		//	boxMesh->GenerateMesh();
+		GameObject::Sptr wall2 = scene->CreateGameObject("Specular Object");
+		{
+			MeshResource::Sptr boxMesh = ResourceManager::CreateAsset<MeshResource>();
+			boxMesh->AddParam(MeshBuilderParam::CreateCube(ZERO, ONE));
+			boxMesh->GenerateMesh();
 
-		//	// Set and rotation position in the scene
-		//	wall1->SetPostion(glm::vec3(0, 0.0f, 4.0f));
-		//	wall1->SetScale(glm::vec3(-1.f, -3.f, 9.0f));
+			//Set and rotation position in the scene
+			wall2->SetPostion(glm::vec3(0, 0.0f, 4.0f));
+			wall2->SetScale(glm::vec3(-1.f, -3.f, 9.0f));
 
-		//	// Add a render component
-		//	RenderComponent::Sptr renderer = wall1->Add<RenderComponent>();
-		//	renderer->SetMesh(boxMesh);
-		//	renderer->SetMaterial(testMaterial); 
-		//	RigidBody::Sptr wallRB = wall1->Add<RigidBody>(RigidBodyType::Static);
-		//	wallRB->AddCollider(BoxCollider::Create(glm::vec3(1, 1, 4.5)));
-
-		//
-		//}
+			// Add a render component
+			RenderComponent::Sptr renderer = wall2->Add<RenderComponent>();
+			renderer->SetMesh(boxMesh);
+			renderer->SetMaterial(testMaterial); 
+			RigidBody::Sptr wallRB = wall2->Add<RigidBody>(RigidBodyType::Static);
+			wallRB->AddCollider(BoxCollider::Create(glm::vec3(1, 1, 4.5)));
+		}
 
 		
 
+		GameObject::Sptr wall3 = scene->CreateGameObject("Specular Object");
+		{
+			MeshResource::Sptr boxMesh = ResourceManager::CreateAsset<MeshResource>();
+			boxMesh->AddParam(MeshBuilderParam::CreateCube(ZERO, ONE));
+			boxMesh->GenerateMesh();
+
+			//Set and rotation position in the scene
+			wall3->SetPostion(glm::vec3(-15, 0.0f, 2.0f));
+			wall3->SetScale(glm::vec3(-1.f, -3.f, 4.5f));
+
+			// Add a render component
+			RenderComponent::Sptr renderer1 = wall3->Add<RenderComponent>();
+			renderer1->SetMesh(boxMesh);
+			renderer1->SetMaterial(testMaterial);
+
+			RigidBody::Sptr wallRB = wall3->Add<RigidBody>(RigidBodyType::Static);
+			wallRB->AddCollider(BoxCollider::Create(glm::vec3(1, 1.5, 2.5)));
+		}
+
+
+		GameObject::Sptr platform1 = scene->CreateGameObject("Specular Object");
+		{
+			MeshResource::Sptr boxMesh = ResourceManager::CreateAsset<MeshResource>();
+			boxMesh->AddParam(MeshBuilderParam::CreateCube(ZERO, ONE));
+			boxMesh->GenerateMesh();
+
+			//Set and rotation position in the scene
+			platform1->SetPostion(glm::vec3(-8, 0.0f, 5.5f));
+			platform1->SetScale(glm::vec3(-4.5f, -3.f, 1.f));
+
+			// Add a render component
+			RenderComponent::Sptr renderer1 = platform1->Add<RenderComponent>();
+			renderer1->SetMesh(boxMesh);
+			renderer1->SetMaterial(testMaterial);
+
+			RigidBody::Sptr platform1RB = platform1->Add<RigidBody>(RigidBodyType::Static);
+			platform1RB->AddCollider(BoxCollider::Create(glm::vec3(2.5, 1.7, 0.5)));
+		}
 
 		GameObject::Sptr Enemy = scene->CreateGameObject("Enemy");
 		{
@@ -448,8 +502,6 @@ void DefaultSceneLayer::_CreateScene()
 			RigidBody::Sptr EnemyRG = Enemy->Add<RigidBody>(RigidBodyType::Dynamic);
 			EnemyRG->AddCollider(SphereCollider::Create(0.75));
 			EnemyRG->SetLinearDamping(2.0f);
-
-		
 		}
 
 
