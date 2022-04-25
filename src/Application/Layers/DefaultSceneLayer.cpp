@@ -579,7 +579,6 @@ void DefaultSceneLayer::_CreateScene()
 		}
 		
 		
-		
 		GuiBatcher::SetDefaultTexture(ResourceManager::CreateAsset<Texture2D>("textures/ui-sprite.png"));
 		GuiBatcher::SetDefaultBorderRadius(8);
 
