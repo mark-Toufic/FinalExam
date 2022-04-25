@@ -9,6 +9,7 @@
 #include "Utils/ImGuiHelper.h"
 #include "Gameplay/InputEngine.h"
 #include "Application/Application.h"
+#include "Gameplay/Components/JumpBehaviour.h"
 
 float jumpcooldown = 0;
  float playerX, playerY, playerZ;
@@ -63,15 +64,7 @@ void SimpleCameraControl::Update(float deltaTime)
 				playerZ = GetGameObject()->GetPosition().z;
 				
 			}
-
-			if (InputEngine::IsKeyDown(GLFW_KEY_SPACE))
-			{
-				input.z += _moveSpeeds.y;
-				playerX = GetGameObject()->GetPosition().x;
-				playerY = GetGameObject()->GetPosition().y;
-				playerZ = GetGameObject()->GetPosition().z;
-				
-			}
+	
 				
 			input *= deltaTime;
 

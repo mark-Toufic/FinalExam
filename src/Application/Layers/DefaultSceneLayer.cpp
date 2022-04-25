@@ -403,12 +403,13 @@ void DefaultSceneLayer::_CreateScene()
 			renderer->SetMaterial(monkeyMaterial);
 
 			// Add some behaviour that relies on the physics body
-			Player->Add<JumpBehaviour>();
+			
 			Player->Add<SimpleCameraControl>();
 		
 			RigidBody::Sptr PlayerRG = Player->Add<RigidBody>(RigidBodyType::Dynamic);
 			PlayerRG->AddCollider(SphereCollider::Create(0.75));
-			PlayerRG->SetLinearDamping(2.0f);
+			//PlayerRG->SetLinearDamping(2.0f);
+			Player->Add<JumpBehaviour>();
 		}
 
 

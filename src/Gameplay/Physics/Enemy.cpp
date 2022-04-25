@@ -87,33 +87,18 @@ void EnemyBehaviour::Update(float deltaTime)
 				GetGameObject()->LookAt(glm::vec3(playerX, playerY, 0));
 
 			
-
-
-
-				if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 1) + pow(GetGameObject()->GetPosition().y - playerY, 1) + pow(GetGameObject()->GetPosition().z - playerZ, 0) * 1)) <= 1.5)
+				if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 0.7) + pow(GetGameObject()->GetPosition().y - playerY, 0.7) + pow(GetGameObject()->GetPosition().z - playerZ, 0.4) * 1.1)) <= 1.5)
 				{
 					cout << "die" << endl;
 				}
 
-
-				
-
-
-				
-
 			}
 
-
-			
 			else if (playerX <= -25)
 			{
 				cout << "win" << endl;
 			}
 
-			
-				
-
-			
 			else
 			{
 				std::vector<glm::vec3> _points = { glm::vec3(-9.0f, 0, 1.0f), glm::vec3(-3.0f, 0, 1.0f), };
