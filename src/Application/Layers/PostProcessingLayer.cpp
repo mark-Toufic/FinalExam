@@ -10,6 +10,7 @@
 #include "PostProcessing/DepthOfField.h"
 #include "PostProcessing/ToonShader.h"
 #include "PostProcessing/FilmGrain.h"
+#include "PostProcessing/NegativeEffect.h"
 
 PostProcessingLayer::PostProcessingLayer() :
 	ApplicationLayer()
@@ -33,13 +34,16 @@ void PostProcessingLayer::OnAppLoad(const nlohmann::json& config)
 	// Loads some effects in
 	_effects.push_back(std::make_shared<ColorCorrectionEffect>());
 	_effects.push_back(std::make_shared<ToonShadingEffect>());
+	_effects.push_back(std::make_shared<NegativeEffect>());
 	_effects.push_back(std::make_shared<BoxFilter3x3>());
 	_effects.push_back(std::make_shared<BoxFilter5x5>());
 	_effects.push_back(std::make_shared<OutlineEffect>());
 	_effects.push_back(std::make_shared<DepthOfField>());
 	_effects.push_back(std::make_shared<filmGrain>());
 
+
 	GetEffect<OutlineEffect>()->Enabled = false;
+	GetEffect<NegativeEffect>()->Enabled = false;
 
 	Application& app = Application::Get();
 	const glm::uvec4& viewport = app.GetPrimaryViewport();

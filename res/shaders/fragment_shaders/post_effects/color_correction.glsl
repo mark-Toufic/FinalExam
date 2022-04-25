@@ -11,7 +11,8 @@ uniform float u_Strength;
 
 void main() {
     vec3 color = texture(s_Image, inUV).rgb;
+
     outColor = mix(color, texture(s_Lut, color).rgb, clamp(u_Strength, 0, 1));
+
+
 }
-
-

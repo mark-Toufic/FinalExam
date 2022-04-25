@@ -124,6 +124,7 @@
     <ClInclude Include="src\Application\Layers\PostProcessing\ColorCorrectionEffect.h" />
     <ClInclude Include="src\Application\Layers\PostProcessing\DepthOfField.h" />
     <ClInclude Include="src\Application\Layers\PostProcessing\FilmGrain.h" />
+    <ClInclude Include="src\Application\Layers\PostProcessing\NegativeEffect.h" />
     <ClInclude Include="src\Application\Layers\PostProcessing\OutlineEffect.h" />
     <ClInclude Include="src\Application\Layers\PostProcessing\ToonShader.h" />
     <ClInclude Include="src\Application\Layers\PostProcessingLayer.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="src\Application\Layers\PostProcessing\ColorCorrectionEffect.cpp" />
     <ClCompile Include="src\Application\Layers\PostProcessing\DepthOfField.cpp" />
     <ClCompile Include="src\Application\Layers\PostProcessing\FilmGrain.cpp" />
+    <ClCompile Include="src\Application\Layers\PostProcessing\NegativeEffect.cpp" />
     <ClCompile Include="src\Application\Layers\PostProcessing\OutlineEffect.cpp" />
     <ClCompile Include="src\Application\Layers\PostProcessing\ToonShader.cpp" />
     <ClCompile Include="src\Application\Layers\PostProcessingLayer.cpp" />
@@ -322,6 +324,9 @@
     <ProjectReference Include="..\..\modules\toolkit\toolkit.vcxproj">
       <Project>{AB7025F0-1750-A48B-2068-2F628CC60AED}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\fragment_shaders\post_effects\NegativeEffect.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

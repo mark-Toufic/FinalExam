@@ -93,7 +93,7 @@ public:
 	 * Gets an immutable list of effects from this layer
 	 */
 	const std::vector<Effect::Sptr>& GetEffects() const;
-
+	
 	/**
 	 * Adds a new effect to the end of the processing stack
 	 */
