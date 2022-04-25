@@ -149,6 +149,7 @@ void DefaultSceneLayer::_CreateScene()
 		Texture2D::Sptr    leafTex      = ResourceManager::CreateAsset<Texture2D>("textures/leaves.png");
 		Texture2D::Sptr    eggTex       = ResourceManager::CreateAsset<Texture2D>("textures/EggTex.png");
 		Texture2D::Sptr    peachTex     = ResourceManager::CreateAsset<Texture2D>("textures/PeachTex.png");
+		Texture2D::Sptr    birdoTex     = ResourceManager::CreateAsset<Texture2D>("textures/BirdoTex.png");
 
 		leafTex->SetMinFilter(MinFilter::Nearest);
 		leafTex->SetMagFilter(MagFilter::Nearest);
@@ -243,6 +244,13 @@ void DefaultSceneLayer::_CreateScene()
 			peachMaterial->Set("u_Material.AlbedoMap", peachTex);
 			peachMaterial->Set("u_Material.NormalMap", normalMapDefault);
 			peachMaterial->Set("u_Material.Shininess", 0.1f);
+		}
+		Material::Sptr birdoMaterial = ResourceManager::CreateAsset<Material>(deferredForward);
+		{
+			birdoMaterial->Name = "BirdoMat";
+			birdoMaterial->Set("u_Material.AlbedoMap", birdoTex);
+			birdoMaterial->Set("u_Material.NormalMap", normalMapDefault);
+			birdoMaterial->Set("u_Material.Shininess", 0.1f);
 		}
 		/*
 		// This will be the reflective material, we'll make the whole thing 50% reflective
@@ -397,7 +405,7 @@ void DefaultSceneLayer::_CreateScene()
 
 		MeshResource::Sptr eggMesh = ResourceManager::CreateAsset<MeshResource>("Egg.obj");
 		MeshResource::Sptr peachMesh = ResourceManager::CreateAsset<MeshResource>("Peach.obj");
-		
+		MeshResource::Sptr birdoMesh = ResourceManager::CreateAsset<MeshResource>("Birdo.obj");
 
 		// Set up the scene's camera
 		GameObject::Sptr camera = scene->MainCamera->GetGameObject()->SelfRef();
@@ -535,11 +543,11 @@ void DefaultSceneLayer::_CreateScene()
 		GameObject::Sptr Birdo = scene->CreateGameObject("Birdo");
 		{
 			Birdo->SetPostion(glm::vec3(-25.0f, 0.0f, 1.0f));
-
+			Birdo->SetRotation(glm::vec3(90.0f, 0.0f, 0.0f));
 			// Add a render component
 			RenderComponent::Sptr renderer = Birdo->Add<RenderComponent>();
-			renderer->SetMesh(sphere);
-			renderer->SetMaterial(boxMaterial);
+			renderer->SetMesh(birdoMesh);
+			renderer->SetMaterial(birdoMaterial);
 
 			
 
