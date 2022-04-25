@@ -100,7 +100,7 @@ void EnemyBehaviour::Update(float deltaTime)
 			
 				if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 1) + pow(GetGameObject()->GetPosition().z - playerZ,1) * 1)) > 0.8)
 				{
-					cout << "die" << endl;
+					cout << "lose" << endl;
 				}
 
 			}
