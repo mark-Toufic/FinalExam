@@ -95,11 +95,20 @@ void EnemyBehaviour::Update(float deltaTime)
 					cout << "die" << endl;
 				}
 
+
+				
+
+
 				
 
 			}
 
-		
+
+			
+			else if (playerX <= -25)
+			{
+				cout << "win" << endl;
+			}
 
 			
 				
