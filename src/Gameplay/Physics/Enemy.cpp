@@ -53,6 +53,9 @@ EnemyBehaviour::~EnemyBehaviour() = default;
 
 float deathTime1 = 0;
 
+
+
+// Code below has been taken from Hoepful goats enemy script mad by Mark Toufic and COlin Charleson
 void EnemyBehaviour::Update(float deltaTime)
 {
 	

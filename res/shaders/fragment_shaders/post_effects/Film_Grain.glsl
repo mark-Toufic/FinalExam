@@ -1,5 +1,5 @@
 #version 430
-
+//Taken from Hoepful goats game 
 layout(location = 0) in vec2 inUV;
 layout(location = 0) out vec3 outColor;
 
