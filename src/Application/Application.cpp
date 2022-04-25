@@ -136,7 +136,6 @@ bool Application::LoadScene(const std::string& path) {
 	}
 	return false;
 }
-
 void Application::LoadScene(const Gameplay::Scene::Sptr& scene) {
 	_targetScene = scene;
 }

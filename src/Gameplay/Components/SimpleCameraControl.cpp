@@ -51,7 +51,7 @@ void SimpleCameraControl::Update(float deltaTime)
 				input.x -= _moveSpeeds.y;
 				playerX = GetGameObject()->GetPosition().x;
 				playerY = GetGameObject()->GetPosition().y;
-				playerZ = GetGameObject()->GetPosition().y;
+				playerZ = GetGameObject()->GetPosition().z;
 
 				
 			}
