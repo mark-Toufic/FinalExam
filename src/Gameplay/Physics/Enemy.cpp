@@ -88,24 +88,21 @@ void EnemyBehaviour::Update(float deltaTime)
 
 			
 
-				if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 1) + pow(GetGameObject()->GetPosition().y - playerY, 1) + pow(GetGameObject()->GetPosition().z - playerZ, 1) * 1)) <= 1.5)
+
+
+				if ((sqrt(pow(GetGameObject()->GetPosition().x - playerX, 1) + pow(GetGameObject()->GetPosition().y - playerY, 1) + pow(GetGameObject()->GetPosition().z - playerZ, 0) * 1)) <= 1.5)
 				{
-					if (GetGameObject()->GetPosition().x == playerX)
-					{
-						if (GetGameObject()->GetPosition().y == playerY)
-						{
-							if (GetGameObject()->GetPosition().x == playerX)
-							{
-								if (GetGameObject()->GetPosition().y == playerY)
-								{
-									std::cout << "die";
-								}
-							}
-						}
-					}
+					cout << "die" << endl;
 				}
 
+				
+
 			}
+
+		
+
+			
+				
 
 			
 			else
