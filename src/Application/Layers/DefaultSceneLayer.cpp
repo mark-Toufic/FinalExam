@@ -496,39 +496,34 @@ void DefaultSceneLayer::_CreateScene()
 		}
 
 
-		GameObject::Sptr platform1 = scene->CreateGameObject("Specular Object");
-		{
-			MeshResource::Sptr boxMesh = ResourceManager::CreateAsset<MeshResource>();
-			boxMesh->AddParam(MeshBuilderParam::CreateCube(ZERO, ONE));
-			boxMesh->GenerateMesh();
 
-			//Set and rotation position in the scene
-			platform1->SetPostion(glm::vec3(-8, 0.0f, 5.5f));
-			platform1->SetScale(glm::vec3(-4.5f, -3.f, 1.f));
+
+		GameObject::Sptr egg = scene->CreateGameObject("Enemy");
+		{
+			egg->SetPostion(glm::vec3(-9.0f, 0.0f, 4.0f));
 
 			// Add a render component
-			RenderComponent::Sptr renderer1 = platform1->Add<RenderComponent>();
-			renderer1->SetMesh(boxMesh);
-			renderer1->SetMaterial(testMaterial);
-
-			RigidBody::Sptr platform1RB = platform1->Add<RigidBody>(RigidBodyType::Static);
-			platform1RB->AddCollider(BoxCollider::Create(glm::vec3(2.5, 1.7, 0.5)));
-		}
-
-		GameObject::Sptr Enemy = scene->CreateGameObject("Enemy");
-		{
-			Enemy->SetPostion(glm::vec3(-9.0f, 0.0f, 1.0f));
-
-			// Add a render component
-			RenderComponent::Sptr renderer = Enemy->Add<RenderComponent>();
+			RenderComponent::Sptr renderer = egg->Add<RenderComponent>();
 			renderer->SetMesh(sphere);
 			renderer->SetMaterial(boxMaterial);
 
-			Enemy->Add<EnemyBehaviour>();
+			egg->Add<EnemyBehaviour>();
 
-			RigidBody::Sptr EnemyRG = Enemy->Add<RigidBody>(RigidBodyType::Dynamic);
+			RigidBody::Sptr EnemyRG = egg->Add<RigidBody>(RigidBodyType::Dynamic);
 			EnemyRG->AddCollider(SphereCollider::Create(0.75));
 			EnemyRG->SetLinearDamping(2.0f);
+		}
+		GameObject::Sptr Birdo = scene->CreateGameObject("Enemy");
+		{
+			Birdo->SetPostion(glm::vec3(-25.0f, 0.0f, 1.0f));
+
+			// Add a render component
+			RenderComponent::Sptr renderer = Birdo->Add<RenderComponent>();
+			renderer->SetMesh(sphere);
+			renderer->SetMaterial(boxMaterial);
+
+			
+
 		}
 
 

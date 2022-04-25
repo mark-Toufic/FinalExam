@@ -64,22 +64,30 @@ void EnemyBehaviour::Update(float deltaTime)
 
 				if (GetGameObject()->GetPosition().x > playerX)
 				{
-					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x - 0.03, GetGameObject()->GetPosition().y, GetGameObject()->GetPosition().z));
+					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x - 0.01, GetGameObject()->GetPosition().y, GetGameObject()->GetPosition().z));
 				}
 
 				if (GetGameObject()->GetPosition().y > playerY)
 				{
-					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y - 0.03, GetGameObject()->GetPosition().z));
+					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y - 0.01, GetGameObject()->GetPosition().z));
+				}
+				if (GetGameObject()->GetPosition().z > playerZ)
+				{
+					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y , GetGameObject()->GetPosition().z - 0.01));
 				}
 
 				if (GetGameObject()->GetPosition().x < playerX)
 				{
-					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x + 0.03, GetGameObject()->GetPosition().y, GetGameObject()->GetPosition().z));
+					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x + 0.01, GetGameObject()->GetPosition().y, GetGameObject()->GetPosition().z));
 				}
 
 				if (GetGameObject()->GetPosition().y < playerY)
 				{
-					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y + 0.03, GetGameObject()->GetPosition().z));
+					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y + 0.01, GetGameObject()->GetPosition().z));
+				}
+				if (GetGameObject()->GetPosition().z < playerZ)
+				{
+					GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y , GetGameObject()->GetPosition().z + 0.01));
 				}
 
 		
@@ -101,7 +109,7 @@ void EnemyBehaviour::Update(float deltaTime)
 
 			else
 			{
-				std::vector<glm::vec3> _points = { glm::vec3(-9.0f, 0, 1.0f), glm::vec3(-3.0f, 0, 1.0f), };
+				std::vector<glm::vec3> _points = { glm::vec3(-9.0f, 0, 4.0f), glm::vec3(-3.0f, 0, 4.0f), };
 
 				_timer += deltaTime;
 
