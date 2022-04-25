@@ -77,7 +77,7 @@ Application::Application() :
 	_windowSize({DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT}),
 	_isRunning(false),
 	_isEditor(true),
-	_windowTitle("INFR - 2350U"),
+	_windowTitle("Final Exam: A-Left D-Right SPACE-Jump"),
 	_currentScene(nullptr),
 	_targetScene(nullptr)
 { }

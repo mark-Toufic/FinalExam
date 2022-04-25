@@ -148,6 +148,7 @@ void DefaultSceneLayer::_CreateScene()
 		Texture2D::Sptr    monkeyTex    = ResourceManager::CreateAsset<Texture2D>("textures/monkey-uvMap.png");
 		Texture2D::Sptr    leafTex      = ResourceManager::CreateAsset<Texture2D>("textures/leaves.png");
 		Texture2D::Sptr    eggTex       = ResourceManager::CreateAsset<Texture2D>("textures/EggTex.png");
+		Texture2D::Sptr    peachTex     = ResourceManager::CreateAsset<Texture2D>("textures/PeachTex.png");
 
 		leafTex->SetMinFilter(MinFilter::Nearest);
 		leafTex->SetMagFilter(MagFilter::Nearest);
@@ -235,6 +236,13 @@ void DefaultSceneLayer::_CreateScene()
 			eggMaterial->Set("u_Material.AlbedoMap", eggTex);
 			eggMaterial->Set("u_Material.NormalMap", normalMapDefault);
 			eggMaterial->Set("u_Material.Shininess", 0.1f);
+		}
+		Material::Sptr peachMaterial = ResourceManager::CreateAsset<Material>(deferredForward);
+		{
+			peachMaterial->Name = "PeachMat";
+			peachMaterial->Set("u_Material.AlbedoMap", peachTex);
+			peachMaterial->Set("u_Material.NormalMap", normalMapDefault);
+			peachMaterial->Set("u_Material.Shininess", 0.1f);
 		}
 		/*
 		// This will be the reflective material, we'll make the whole thing 50% reflective
@@ -388,6 +396,7 @@ void DefaultSceneLayer::_CreateScene()
 		sphere->GenerateMesh();
 
 		MeshResource::Sptr eggMesh = ResourceManager::CreateAsset<MeshResource>("Egg.obj");
+		MeshResource::Sptr peachMesh = ResourceManager::CreateAsset<MeshResource>("Peach.obj");
 		
 
 		// Set up the scene's camera
@@ -404,15 +413,16 @@ void DefaultSceneLayer::_CreateScene()
 			//scene->MainCamera = cam;
 		}
 
-		GameObject::Sptr Player = scene->CreateGameObject("Monkey 1");
+		GameObject::Sptr Player = scene->CreateGameObject("Peach");
 		{
 			// Set position in the scene
 			Player->SetPostion(glm::vec3(30.f, 0.0f, 1.0f));
+			Player->SetRotation(glm::vec3(90.0f, 0.0f, 0.0f));
 
 			// Create and attach a renderer for the monkey
 			RenderComponent::Sptr renderer = Player->Add<RenderComponent>();
-			renderer->SetMesh(monkeyMesh);
-			renderer->SetMaterial(monkeyMaterial);
+			renderer->SetMesh(peachMesh);
+			renderer->SetMaterial(peachMaterial);
 
 			// Add some behaviour that relies on the physics body
 			
@@ -507,9 +517,6 @@ void DefaultSceneLayer::_CreateScene()
 			wallRB->AddCollider(BoxCollider::Create(glm::vec3(1, 1.5, 2.5)));
 		}
 
-
-
-
 		GameObject::Sptr egg = scene->CreateGameObject("Egg");
 		{
 			egg->SetPostion(glm::vec3(-9.0f, 0.0f, 4.0f));
@@ -525,7 +532,7 @@ void DefaultSceneLayer::_CreateScene()
 			EnemyRG->AddCollider(SphereCollider::Create(0.75));
 			EnemyRG->SetLinearDamping(2.0f);
 		}
-		GameObject::Sptr Birdo = scene->CreateGameObject("Enemy");
+		GameObject::Sptr Birdo = scene->CreateGameObject("Birdo");
 		{
 			Birdo->SetPostion(glm::vec3(-25.0f, 0.0f, 1.0f));
 

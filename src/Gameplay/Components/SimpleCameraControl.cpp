@@ -41,7 +41,7 @@ void SimpleCameraControl::Update(float deltaTime)
 			glm::quat rotX = glm::angleAxis(glm::radians(_currentRot.x), glm::vec3(0, 0, 1));
 			glm::quat rotY = glm::angleAxis(glm::radians(_currentRot.y), glm::vec3(1, 0, 0));
 			glm::quat currentRot = rotX * rotY;
-			GetGameObject()->SetRotation(currentRot);
+			GetGameObject()->SetRotation(glm::vec3(90.0f, 0.0f, 0.0f));
 
 			_prevMousePos = currentMousePos;
 
