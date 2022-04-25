@@ -159,7 +159,7 @@ void DefaultSceneLayer::_CreateScene()
 		ResourceManager::CreateAsset<Texture2D>("textures/flashlight-2.png");
 		ResourceManager::CreateAsset<Texture2D>("textures/light_projection.png");
 
-		Texture2DArray::Sptr particleTex = ResourceManager::CreateAsset<Texture2DArray>("textures/particles.png", 2, 2);
+		Texture2DArray::Sptr particleTex = ResourceManager::CreateAsset<Texture2DArray>("textures/particlesV2.png", 2, 2);
 
 		//DebugWindow::Sptr debugWindow = app.GetLayer<ImGuiDebugLayer>()->GetWindow<DebugWindow>();
 
@@ -576,7 +576,7 @@ void DefaultSceneLayer::_CreateScene()
 
 			ParticleSystem::ParticleData emitter;
 			emitter.Type = ParticleType::SphereEmitter;
-			emitter.TexID = 2;
+			emitter.TexID = 1;
 			
 			emitter.Position = glm::vec3(0.0f);
 			emitter.Color = glm::vec4(0.5f, 0.5f, 0.5f, 1.0f);
@@ -585,7 +585,7 @@ void DefaultSceneLayer::_CreateScene()
 			emitter.SphereEmitterData.Velocity = 0.5f;
 			emitter.SphereEmitterData.LifeRange = { 1.0f, 4.0f };
 			emitter.SphereEmitterData.Radius = 1.0f;
-			emitter.SphereEmitterData.SizeRange = { 0.5f, 1.5f };
+			emitter.SphereEmitterData.SizeRange = { 1.0f, 1.0f };
 
 			particleManager->AddEmitter(emitter);
 		}
