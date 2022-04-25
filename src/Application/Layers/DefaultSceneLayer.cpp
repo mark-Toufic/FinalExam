@@ -147,6 +147,8 @@ void DefaultSceneLayer::_CreateScene()
 		Texture2D::Sptr    boxSpec      = ResourceManager::CreateAsset<Texture2D>("textures/box-specular.png");
 		Texture2D::Sptr    monkeyTex    = ResourceManager::CreateAsset<Texture2D>("textures/monkey-uvMap.png");
 		Texture2D::Sptr    leafTex      = ResourceManager::CreateAsset<Texture2D>("textures/leaves.png");
+		Texture2D::Sptr    eggTex       = ResourceManager::CreateAsset<Texture2D>("textures/EggTex.png");
+
 		leafTex->SetMinFilter(MinFilter::Nearest);
 		leafTex->SetMagFilter(MagFilter::Nearest);
 
@@ -226,6 +228,13 @@ void DefaultSceneLayer::_CreateScene()
 			monkeyMaterial->Set("u_Material.AlbedoMap", monkeyTex);
 			monkeyMaterial->Set("u_Material.NormalMap", normalMapDefault);
 			monkeyMaterial->Set("u_Material.Shininess", 0.1f);
+		}
+		Material::Sptr eggMaterial = ResourceManager::CreateAsset<Material>(deferredForward);
+		{
+			eggMaterial->Name = "EggMat";
+			eggMaterial->Set("u_Material.AlbedoMap", eggTex);
+			eggMaterial->Set("u_Material.NormalMap", normalMapDefault);
+			eggMaterial->Set("u_Material.Shininess", 0.1f);
 		}
 		/*
 		// This will be the reflective material, we'll make the whole thing 50% reflective
@@ -378,6 +387,9 @@ void DefaultSceneLayer::_CreateScene()
 		sphere->AddParam(MeshBuilderParam::CreateIcoSphere(ZERO, ONE, 5));
 		sphere->GenerateMesh();
 
+		MeshResource::Sptr eggMesh = ResourceManager::CreateAsset<MeshResource>("Egg.obj");
+		
+
 		// Set up the scene's camera
 		GameObject::Sptr camera = scene->MainCamera->GetGameObject()->SelfRef();
 		{
@@ -498,14 +510,14 @@ void DefaultSceneLayer::_CreateScene()
 
 
 
-		GameObject::Sptr egg = scene->CreateGameObject("Enemy");
+		GameObject::Sptr egg = scene->CreateGameObject("Egg");
 		{
 			egg->SetPostion(glm::vec3(-9.0f, 0.0f, 4.0f));
 
 			// Add a render component
 			RenderComponent::Sptr renderer = egg->Add<RenderComponent>();
-			renderer->SetMesh(sphere);
-			renderer->SetMaterial(boxMaterial);
+			renderer->SetMesh(eggMesh);
+			renderer->SetMaterial(eggMaterial);
 
 			egg->Add<EnemyBehaviour>();
 
